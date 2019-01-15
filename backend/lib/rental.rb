@@ -3,13 +3,12 @@ require 'date'
 class Rental
   attr_reader :id
 
-  def initialize(id, car, start_date, end_date, distance, decreasing_price = false)
+  def initialize(id, car, start_date, end_date, distance)
     @id = id
     @car = car
     @start_date = Date.parse start_date
     @end_date = Date.parse end_date
     @distance = distance
-    @decreasing_price = decreasing_price
   end
 
   def days
@@ -38,7 +37,11 @@ class Rental
     @car.price_per_km * @distance
   end
 
+  def full_price
+    time_price + distance_price
+  end
+
   def price
-    (@decreasing_price ? decreasing_time_price : time_price) + distance_price
+    decreasing_time_price + distance_price
   end
 end

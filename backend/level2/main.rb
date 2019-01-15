@@ -1,36 +1,16 @@
-require 'json'
-require File.dirname(__dir__) + '/lib/car'
 require File.dirname(__dir__) + '/lib/rental'
+require File.dirname(__dir__) + '/lib/input_data_parser'
 
 module Level2
-  class Main
-    def self.run
-      input_file = File.read(File.dirname(__FILE__) + '/data/input.json')
-      json = JSON.parse(input_file)
-
-      cars = json['cars'].reduce({}) do |hash, car|
-        hash.update(car['id'] =>
-          Car.new(car['id'], car['price_per_day'], car['price_per_km'])
-        )
-      end
-
-      rentals = {}
-      rentals[:rentals] = json['rentals'].map do |rental|
-        car = cars[rental['car_id']]
-        rental = Rental.new(
-          rental['id'],
-          car,
-          rental['start_date'],
-          rental['end_date'],
-          rental['distance'],
-          true
-        )
-        { id: rental.id, price: rental.price }
-      end
-
-      rentals.to_json
+  class Main < InputDataParser
+    def run
+      {
+        rentals: rentals.map do |rental|
+          { id: rental.id, price: rental.price }
+        end
+      }.to_json
     end
   end
 end
 
-puts Level2::Main.run
+puts Level2::Main.new('level2').run
