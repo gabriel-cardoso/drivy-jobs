@@ -1,6 +1,6 @@
 require 'json'
-require File.dirname(__FILE__) + '/../lib/car'
-require File.dirname(__FILE__) + '/../lib/rental'
+require File.dirname(__dir__) + '/lib/car'
+require File.dirname(__dir__) + '/lib/rental'
 
 module Level1
   class Main
