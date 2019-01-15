@@ -1,6 +1,6 @@
 require 'json'
-require File.dirname(__FILE__) + '/../lib/car'
-require File.dirname(__FILE__) + '/../lib/rental'
+require File.dirname(__dir__) + '/lib/car'
+require File.dirname(__dir__) + '/lib/rental'
 
 module Level2
   class Main
@@ -17,7 +17,14 @@ module Level2
       rentals = {}
       rentals[:rentals] = json['rentals'].map do |rental|
         car = cars[rental['car_id']]
-        rental = Rental.new(rental['id'], car, rental['start_date'], rental['end_date'], rental['distance'], true)
+        rental = Rental.new(
+          rental['id'],
+          car,
+          rental['start_date'],
+          rental['end_date'],
+          rental['distance'],
+          true
+        )
         { id: rental.id, price: rental.price }
       end
 

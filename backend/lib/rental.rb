@@ -9,7 +9,7 @@ class Rental
     @start_date = Date.parse start_date
     @end_date = Date.parse end_date
     @distance = distance
-    @decreasing_price = @decreasing_price
+    @decreasing_price = decreasing_price
   end
 
   def days
@@ -20,12 +20,17 @@ class Rental
     @car.price_per_day * days
   end
 
+  def price_for_day day
+    return @car.price_per_day * 0.5 if day > 10
+    return @car.price_per_day * 0.7 if day > 4
+    return @car.price_per_day * 0.9 if day > 1
+
+    @car.price_per_day
+  end
+
   def decreasing_time_price
     (1..days).reduce(0) do |sum, day|
-      return sum + @car.price_per_day * 0.5 if day > 10
-      return sum + @car.price_per_day * 0.7 if day > 4
-      return sum + @car.price_per_day * 0.9 if day > 1
-      sum + @car.price_per_day
+      (sum + price_for_day(day)).to_i
     end
   end
 
@@ -34,7 +39,6 @@ class Rental
   end
 
   def price
-    puts @decreasing_price
     (@decreasing_price ? decreasing_time_price : time_price) + distance_price
   end
 end
