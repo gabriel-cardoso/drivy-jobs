@@ -1,4 +1,5 @@
 require File.dirname(__dir__) + '/lib/money_dispatcher'
+require File.dirname(__dir__) + '/lib/input_data_parser'
 
 module Level4
   class Main < InputDataParser
@@ -15,4 +16,4 @@ module Level4
   end
 end
 
-puts Level3::Main.new('level3').run
+puts Level4::Main.new('level4').run

@@ -1,14 +1,15 @@
 require 'date'
 
 class Rental
-  attr_reader :id
+  attr_reader :id, :options
 
-  def initialize(id, car, start_date, end_date, distance)
+  def initialize(id, car, start_date, end_date, distance, options = [])
     @id = id
     @car = car
     @start_date = Date.parse start_date
     @end_date = Date.parse end_date
     @distance = distance
+    @options = options
   end
 
   def days
@@ -43,5 +44,29 @@ class Rental
 
   def price
     decreasing_time_price + distance_price
+  end
+
+  def price_with_options
+    price + options_price
+  end
+
+  def owner_options
+    @options.select{ |options| options.is_a? OwnerOption }
+  end
+
+  def drivy_options
+    @options.select{ |options| options.is_a? DrivyOption }
+  end
+
+  def owner_options_price
+    options_price owner_options
+  end
+
+  def drivy_options_price
+    options_price drivy_options
+  end
+
+  def options_price(options = @options)
+    options.map(&:amount_per_day).sum * days
   end
 end
