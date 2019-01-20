@@ -1,41 +1,41 @@
-# Drivy Backend Challenge
+# :car: Drivy Backend Challenge
 
-Looking for a job? Check out our [open positions](https://en.drivy.com/jobs).
-You can also take a look at our [engineering blog](https://drivy.engineering/) to learn more about the way we work.
+This is my implementation of the Drivy Backend Challenge :tada:
 
-## Guidelines
+## Usage
 
-**For each level, write code that generates a `data/output.json` file from `data/input.json`.
-An `expected_output.json` file is available to give you a reference on what result is expected.**
+```
+cd backend
+rvm use # if you use RVM
+bundle install
+```
 
-- Clone this repo (do **not** fork it)
-- Solve the levels in ascending order
-- Only do one commit per level
+As pointed in the original README, each level can be launched as following
 
-## Pointers
+```
+ruby main.rb
+```
 
-You can have a look at the higher levels, but please do the simplest thing that could work for the level you're currently solving.
+Launching from outside of the level floder also works
 
-The levels become more complex over time, so you will probably have to re-use some code and adapt it to the new requirements.
-A good way to solve this is by using OOP, adding new layers of abstraction when they become necessary and possibly write tests so you don't break what you have already done.
 
-Don't hesitate to write [shameless code](http://red-badger.com/blog/2014/08/20/i-spent-3-days-with-sandi-metz-heres-what-i-learned/) at first, and then refactor it in the next levels.
+## Tests
 
-For higher levels we are interested in seeing code that is clean, extensible and robust, so don't overlook edge cases, use exceptions where needed, ...
+As a beginner with test programming, I only wrote one test per level checking that the expected output matches the `Main#run` class method outputs
 
-Please also note that:
+Tests can be run with
 
-- All prices are stored as integers (in cents)
-- Running `$ ruby main.rb` from the level folder should generate the desired output, but of course feel free to add more files if needed.
+```
+rspec
+```
 
-## Sending Your Results
+## About the "one commit" per level rule ...
 
-Once you are done, please send your results to someone from Drivy.
+You will find 8 commits instead of 5 :grin:.
 
-- If you are already in discussion with us, send it directly to the person you are talking to.
-- If not, use the application form [on every job listing](https://en.drivy.com/jobs).
+- after level 1 commit, you will find two refactoring commits that I'll be glad to discuss :wink:
+- after level 5 commit, I added one last refactoring and commenting commit
 
-You can send your Github project link or zip your directory and send it via email.
-If you do not use Github, don't forget to attach your `.git` folder.
+Looking forward to discussing with you !
 
-Good luck!
+Have a nice review :eyes:

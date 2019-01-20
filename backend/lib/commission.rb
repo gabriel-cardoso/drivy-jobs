@@ -1,8 +1,10 @@
+# Class in charge of computing commission fees for a given rental
 class Commission
-  def initialize rental
+  def initialize(rental)
     @rental = rental
   end
 
+  # Commission total
   def total
     @total ||= (@rental.price * 0.3).to_i
   end

@@ -1,10 +1,20 @@
+# A class that can create rental option instance for a given type
+class RentalOptionFactory
+  def self.create(type)
+    case type
+    when 'gps'
+      GPSOption.new
+    when 'baby_seat'
+      BabySeatOption.new
+    when 'additional_insurance'
+      AdditionalInsuranceOption.new
+    end
+  end
+end
+
+# Rental option parent class
 class RentalOption
   attr_reader :type, :amount_per_day
-  def self.create(type)
-    return GPSOption.new if type == 'gps'
-    return BabySeatOption.new if type == 'baby_seat'
-    return AdditionalInsurance.new if type == 'additional_insurance'
-  end
 end
 
 class OwnerOption < RentalOption; end
@@ -24,7 +34,7 @@ class BabySeatOption < OwnerOption
   end
 end
 
-class AdditionalInsurance < DrivyOption
+class AdditionalInsuranceOption < DrivyOption
   def initialize
     @type = 'additional_insurance'
     @amount_per_day = 1000
